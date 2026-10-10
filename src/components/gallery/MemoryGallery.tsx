@@ -2,8 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState, useCallback, useEffect } from "react";
-import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useCallback, useEffect, useRef } from "react";
+import { X, ZoomIn, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────
 interface Photo {
@@ -152,12 +152,7 @@ function PolaroidCard({
           }}
         >
           {photo.images?.[0] ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={photo.images[0]}
-              alt={photo.title}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            <PhotoImage src={photo.images[0]} alt={photo.title} />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-6xl" aria-hidden="true">
@@ -177,6 +172,19 @@ function PolaroidCard({
             }}
           >
             {photo.year}
+          </span>
+
+          {/* Always-visible zoom hint */}
+          <span
+            className="absolute bottom-2 right-2 w-8 h-8 rounded-full flex items-center justify-center group-hover:opacity-0 transition-opacity duration-300"
+            style={{
+              background: "rgba(13,0,7,0.7)",
+              backdropFilter: "blur(6px)",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.35)",
+            }}
+            aria-hidden="true"
+          >
+            <ZoomIn size={16} className="text-white" />
           </span>
 
           {/* Zoom icon overlay */}
@@ -201,6 +209,42 @@ function PolaroidCard({
         </p>
       </div>
     </motion.div>
+  );
+}
+
+// ─── Image with shimmer skeleton ──────────────────────────────
+function PhotoImage({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Cached images can finish loading before React attaches onLoad
+  useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setLoaded(true);
+    }
+  }, []);
+
+  return (
+    <>
+      {!loaded && (
+        <div
+          className="absolute inset-0 skeleton-shimmer flex items-center justify-center"
+          aria-hidden="true"
+        >
+          <Heart size={28} className="text-pink-200/60 animate-pulse" fill="currentColor" />
+        </div>
+      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+        style={{ opacity: loaded ? 1 : 0 }}
+      />
+    </>
   );
 }
 
@@ -274,12 +318,10 @@ function Lightbox({
             }}
           >
             {images[index] ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <PhotoImage
                 key={images[index]}
                 src={images[index]}
                 alt={photo.title}
-                className="absolute inset-0 w-full h-full object-cover"
               />
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
@@ -367,6 +409,17 @@ export default function MemoryGallery() {
   const handleOpen = useCallback((p: Photo) => setSelected(p), []);
   const handleClose = useCallback(() => setSelected(null), []);
 
+  // Warm the browser cache so switching photos in the lightbox is instant
+  useEffect(() => {
+    photos.forEach((p) =>
+      p.images?.forEach((src) => {
+        const img = new window.Image();
+        img.decoding = "async";
+        img.src = src;
+      })
+    );
+  }, []);
+
   return (
     <section
       id="gallery"
@@ -419,7 +472,7 @@ export default function MemoryGallery() {
             className="text-sm max-w-md mx-auto"
             style={{ color: "rgba(255,245,247,0.55)", fontFamily: "var(--font-body)" }}
           >
-            Every birthday we've celebrated, and the one still to come.
+            Every birthday we&apos;ve celebrated, and the one still to come.
             Tap any photo to enlarge it.
           </p>
           <div
