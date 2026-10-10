@@ -283,7 +283,7 @@ export default function SurpriseGift() {
                   style={{
                     background: "linear-gradient(135deg, rgba(255,107,157,0.14), rgba(212,160,23,0.09))",
                     border: "1px solid rgba(255,107,157,0.28)",
-                    backdropFilter: "blur(28px)",
+                    backdropFilter: "blur(10px)",
                     boxShadow: "0 0 80px rgba(255,107,157,0.2)",
                   }}
                 >

@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { randomBetween } from "@/lib/utils";
 import type { SparkleParticle } from "@/types";
 
 const COLORS = ["#FF6B9D", "#FFD1DC", "#D4A017", "#F5D788", "#ffffff"];
 const SPARKLE_COUNT = 20;
+const SPARKLE_COUNT_MOBILE = 10;
 
 const StarShape = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -16,13 +16,13 @@ const StarShape = ({ size }: { size: number }) => (
 
 export default function Sparkles() {
   const [sparkles, setSparkles] = useState<SparkleParticle[]>([]);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const generated: SparkleParticle[] = Array.from(
-      { length: SPARKLE_COUNT },
-      (_, i) => ({
+    const count = window.matchMedia("(max-width: 767px)").matches
+      ? SPARKLE_COUNT_MOBILE
+      : SPARKLE_COUNT;
+    setSparkles(
+      Array.from({ length: count }, (_, i) => ({
         id: i,
         x: randomBetween(2, 98),
         y: randomBetween(2, 98),
@@ -30,12 +30,11 @@ export default function Sparkles() {
         duration: randomBetween(2, 5),
         delay: randomBetween(0, 5),
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      })
+      }))
     );
-    setSparkles(generated);
   }, []);
 
-  if (!mounted) return null;
+  if (sparkles.length === 0) return null;
 
   return (
     <div
@@ -43,28 +42,19 @@ export default function Sparkles() {
       aria-hidden="true"
     >
       {sparkles.map((s) => (
-        <motion.div
+        <div
           key={s.id}
-          className="absolute"
+          className="sparkle-star absolute"
           style={{
             left: `${s.x}%`,
             top: `${s.y}%`,
             color: s.color,
-          }}
-          animate={{
-            opacity: [0, 1, 0],
-            scale: [0.5, 1.2, 0.5],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: s.duration,
-            delay: s.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
+            animationDuration: `${s.duration}s`,
+            animationDelay: `${s.delay}s`,
           }}
         >
           <StarShape size={s.size} />
-        </motion.div>
+        </div>
       ))}
     </div>
   );

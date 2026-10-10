@@ -159,7 +159,7 @@ function FlipCard({ reason }: { reason: Reason }) {
             WebkitBackfaceVisibility: "hidden",
             background: `linear-gradient(135deg, ${reason.color}22, ${reason.color}0d)`,
             border: `1px solid ${reason.color}35`,
-            backdropFilter: "blur(20px)",
+            backdropFilter: "blur(10px)",
           }}
         >
           <span className="text-4xl sm:text-5xl" aria-hidden="true">{reason.front.emoji}</span>
@@ -186,7 +186,7 @@ function FlipCard({ reason }: { reason: Reason }) {
             transform: "rotateY(180deg)",
             background: `linear-gradient(135deg, ${reason.color}30, ${reason.color}18)`,
             border: `1px solid ${reason.color}50`,
-            backdropFilter: "blur(20px)",
+            backdropFilter: "blur(10px)",
             boxShadow: `0 0 30px ${reason.color}22`,
           }}
         >

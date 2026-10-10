@@ -213,16 +213,22 @@ function PolaroidCard({
 }
 
 // ─── Image with shimmer skeleton ──────────────────────────────
+// Sources already fetched/decoded this session. Starting from "loaded" for these
+// avoids flashing the (bright) skeleton for a frame before a cached photo appears.
+const loadedSrcs = new Set<string>();
+
 function PhotoImage({ src, alt }: { src: string; alt: string }) {
-  const [loaded, setLoaded] = useState(false);
+  const [wasCached] = useState(() => loadedSrcs.has(src));
+  const [loaded, setLoaded] = useState(wasCached);
   const imgRef = useRef<HTMLImageElement>(null);
 
   // Cached images can finish loading before React attaches onLoad
   useEffect(() => {
     if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      loadedSrcs.add(src);
       setLoaded(true);
     }
-  }, []);
+  }, [src]);
 
   return (
     <>
@@ -240,8 +246,13 @@ function PhotoImage({ src, alt }: { src: string; alt: string }) {
         src={src}
         alt={alt}
         decoding="async"
-        onLoad={() => setLoaded(true)}
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+        onLoad={() => {
+          loadedSrcs.add(src);
+          setLoaded(true);
+        }}
+        className={`absolute inset-0 w-full h-full object-cover ${
+          wasCached ? "" : "transition-opacity duration-500"
+        }`}
         style={{ opacity: loaded ? 1 : 0 }}
       />
     </>
@@ -415,6 +426,10 @@ export default function MemoryGallery() {
       p.images?.forEach((src) => {
         const img = new window.Image();
         img.decoding = "async";
+        img.onload = () => {
+          // decode() so the first paint in the lightbox doesn't stall
+          img.decode().catch(() => {}).finally(() => loadedSrcs.add(src));
+        };
         img.src = src;
       })
     );

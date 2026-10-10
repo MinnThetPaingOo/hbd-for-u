@@ -165,7 +165,7 @@ export default function MusicPlayer() {
             style={{
               background: "linear-gradient(135deg, rgba(255,107,157,0.1), rgba(192,56,90,0.07))",
               border: "1px solid rgba(255,107,157,0.2)",
-              backdropFilter: "blur(28px)",
+              backdropFilter: "blur(10px)",
               boxShadow: playing
                 ? `0 0 60px ${track.color}28, 0 12px 40px rgba(0,0,0,0.35)`
                 : "0 8px 32px rgba(0,0,0,0.35)",
@@ -329,7 +329,7 @@ export default function MusicPlayer() {
             style={{
               background: "rgba(255,255,255,0.04)",
               border: "1px solid rgba(255,255,255,0.08)",
-              backdropFilter: "blur(20px)",
+              backdropFilter: "blur(10px)",
             }}
           >
             <div

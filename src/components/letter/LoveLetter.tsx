@@ -61,7 +61,7 @@ function Envelope({ onClick }: { onClick: () => void }) {
           background:
             "linear-gradient(160deg, rgba(212,160,23,0.14) 0%, rgba(245,215,136,0.07) 100%)",
           border: "1px solid rgba(212,160,23,0.32)",
-          backdropFilter: "blur(20px)",
+          backdropFilter: "blur(10px)",
           boxShadow: hovered
             ? "0 0 60px rgba(212,160,23,0.28), 0 12px 40px rgba(0,0,0,0.4)"
             : "0 8px 32px rgba(0,0,0,0.35)",
@@ -132,8 +132,8 @@ function LetterBody() {
         style={{
           background: "rgba(255,255,255,0.07)",
           border: "1px solid rgba(212,160,23,0.22)",
-          backdropFilter: "blur(28px)",
-          WebkitBackdropFilter: "blur(28px)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
           boxShadow: "0 12px 60px rgba(0,0,0,0.4)",
         }}
       >

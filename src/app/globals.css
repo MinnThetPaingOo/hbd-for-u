@@ -73,24 +73,24 @@ body {
 /* Glassmorphism */
 .glass {
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 20px;
   box-shadow: var(--shadow-glass);
 }
 .glass-strong {
   background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 24px;
   box-shadow: 0 8px 40px rgba(0,0,0,0.3);
 }
 .glass-pink {
   background: rgba(255,107,157,0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255,107,157,0.25);
   border-radius: 20px;
 }
@@ -206,3 +206,23 @@ body {
 /* Misc */
 ::selection { background: rgba(255,107,157,0.3); color: var(--pure-white); }
 :focus-visible { outline: 2px solid var(--primary-pink); outline-offset: 3px; border-radius: 4px; }
+
+/* Ambient particles — transform/opacity only so they stay on the GPU */
+.floating-heart {
+  will-change: transform, opacity;
+  animation: heart-rise linear infinite;
+}
+@keyframes heart-rise {
+  0%   { transform: translateY(0) rotate(0deg); opacity: var(--heart-opacity, 0.4); }
+  50%  { opacity: var(--heart-opacity, 0.4); }
+  100% { transform: translateY(calc(-100vh - 100px)) rotate(20deg); opacity: 0; }
+}
+.sparkle-star {
+  will-change: transform, opacity;
+  animation: sparkle-twinkle ease-in-out infinite;
+}
+@keyframes sparkle-twinkle {
+  0%   { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50%  { opacity: 1; transform: scale(1.2) rotate(180deg); }
+  100% { opacity: 0; transform: scale(0.5) rotate(360deg); }
+}

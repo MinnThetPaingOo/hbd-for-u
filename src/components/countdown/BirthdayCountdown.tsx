@@ -47,7 +47,7 @@ function FlipDigit({ value, label }: { value: number; label: string }) {
           height: "clamp(66px, 20vw, 108px)",
           background: "linear-gradient(160deg, rgba(255,107,157,0.16), rgba(192,56,90,0.10))",
           border: "1px solid rgba(255,107,157,0.28)",
-          backdropFilter: "blur(20px)",
+          backdropFilter: "blur(10px)",
           boxShadow: "0 0 28px rgba(255,107,157,0.12), inset 0 1px 0 rgba(255,255,255,0.08)",
         }}
       >
@@ -244,7 +244,7 @@ export default function BirthdayCountdown() {
               style={{
                 background: "rgba(255,107,157,0.1)",
                 border: "1px solid rgba(255,107,157,0.3)",
-                backdropFilter: "blur(20px)",
+                backdropFilter: "blur(10px)",
               }}
             >
               <motion.div
