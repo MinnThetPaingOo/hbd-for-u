@@ -42,46 +42,47 @@ const photos: Photo[] = [
     gradient: "linear-gradient(135deg, #2d0054, #7b1fa2, #8b0000)",
     rotation: -1.2,
   },
-  {
-    id: 4,
-    title: "Your Laughter",
-    caption: "My favorite sound in the world 😂",
-    emoji: "😂",
-    gradient: "linear-gradient(135deg, #ff6b9d, #ffd1dc, #ff6b9d)",
-    rotation: 2.8,
-  },
-  {
-    id: 5,
-    title: "Adventures Together",
-    caption: "Every new place is better with you 🌍",
-    emoji: "🗺️",
-    gradient: "linear-gradient(135deg, #1a6b3d, #2d9b60, #1a4b2d)",
-    rotation: -3.1,
-  },
-  {
-    id: 6,
-    title: "Cozy Moments",
-    caption: "Home is wherever you are ☕",
-    emoji: "☕",
-    gradient: "linear-gradient(135deg, #6b3a1f, #c0725a, #8b4513)",
-    rotation: 1.4,
-  },
-  {
-    id: 7,
-    title: "Dancing in the Rain",
-    caption: "We never needed sunshine ☔",
-    emoji: "💃",
-    gradient: "linear-gradient(135deg, #1a3a7b, #2d6bbf, #0d2255)",
-    rotation: -2.0,
-  },
-  {
-    id: 8,
-    title: "Celebrating You",
-    caption: "Every day should be your day 🎉",
-    emoji: "🎊",
-    gradient: "linear-gradient(135deg, #c0385a, #ff6b9d, #d4a017)",
-    rotation: 2.2,
-  },
+  // ── Temporarily hidden (uncomment to show more photos) ──
+  // {
+  //   id: 4,
+  //   title: "Your Laughter",
+  //   caption: "My favorite sound in the world 😂",
+  //   emoji: "😂",
+  //   gradient: "linear-gradient(135deg, #ff6b9d, #ffd1dc, #ff6b9d)",
+  //   rotation: 2.8,
+  // },
+  // {
+  //   id: 5,
+  //   title: "Adventures Together",
+  //   caption: "Every new place is better with you 🌍",
+  //   emoji: "🗺️",
+  //   gradient: "linear-gradient(135deg, #1a6b3d, #2d9b60, #1a4b2d)",
+  //   rotation: -3.1,
+  // },
+  // {
+  //   id: 6,
+  //   title: "Cozy Moments",
+  //   caption: "Home is wherever you are ☕",
+  //   emoji: "☕",
+  //   gradient: "linear-gradient(135deg, #6b3a1f, #c0725a, #8b4513)",
+  //   rotation: 1.4,
+  // },
+  // {
+  //   id: 7,
+  //   title: "Dancing in the Rain",
+  //   caption: "We never needed sunshine ☔",
+  //   emoji: "💃",
+  //   gradient: "linear-gradient(135deg, #1a3a7b, #2d6bbf, #0d2255)",
+  //   rotation: -2.0,
+  // },
+  // {
+  //   id: 8,
+  //   title: "Celebrating You",
+  //   caption: "Every day should be your day 🎉",
+  //   emoji: "🎊",
+  //   gradient: "linear-gradient(135deg, #c0385a, #ff6b9d, #d4a017)",
+  //   rotation: 2.2,
+  // },
 ];
 
 // ─── Polaroid card ───────────────────────────────────────────
@@ -165,7 +166,7 @@ function PolaroidCard({
 
         {/* Caption */}
         <p
-          className="text-center text-[11px] mt-2 px-1 truncate"
+          className="text-center text-xs mt-2 px-1 truncate"
           style={{
             fontFamily: "var(--font-body)",
             color: "#3d1020",
@@ -200,7 +201,8 @@ function Lightbox({
       aria-label={`Viewing memory: ${photo.title}`}
     >
       <motion.div
-        className="relative max-w-sm w-full"
+        className="relative w-full"
+        style={{ maxWidth: "min(24rem, calc(100svh - 11rem))" }}
         initial={{ scale: 0.75, rotate: photo.rotation, y: 40 }}
         animate={{ scale: 1, rotate: 0, y: 0 }}
         exit={{ scale: 0.75, opacity: 0 }}
@@ -257,7 +259,7 @@ function Lightbox({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute -top-4 -right-4 w-9 h-9 rounded-full flex items-center justify-center border-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-pink-400"
+          className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 w-11 h-11 sm:w-9 sm:h-9 rounded-full flex items-center justify-center border-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-pink-400"
           style={{
             background: "linear-gradient(135deg, #ff6b9d, #c0385a)",
             boxShadow: "0 4px 16px rgba(0,0,0,0.4)",
@@ -324,13 +326,13 @@ export default function MemoryGallery() {
               backgroundClip: "text",
             }}
           >
-            Our Memories
+            Moments to Celebrate
           </h2>
           <p
             className="text-sm max-w-md mx-auto"
             style={{ color: "rgba(255,245,247,0.55)", fontFamily: "var(--font-body)" }}
           >
-            Every moment with you becomes a treasure I hold close to my heart.
+            Little pieces of your story, worth celebrating.
             Tap any photo to enlarge it.
           </p>
           <div
@@ -340,9 +342,9 @@ export default function MemoryGallery() {
         </motion.div>
 
         {/* Masonry-style grid */}
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-5 space-y-4 md:space-y-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-5 md:gap-8 max-w-[17rem] sm:max-w-3xl mx-auto">
           {photos.map((photo, i) => (
-            <div key={photo.id} className="break-inside-avoid">
+            <div key={photo.id}>
               <PolaroidCard photo={photo} index={i} onOpen={handleOpen} />
             </div>
           ))}

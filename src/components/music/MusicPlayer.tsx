@@ -161,7 +161,7 @@ export default function MusicPlayer() {
         >
           {/* ── Player card ── */}
           <div
-            className="rounded-3xl p-6 md:p-8"
+            className="rounded-3xl p-5 sm:p-6 md:p-8"
             style={{
               background: "linear-gradient(135deg, rgba(255,107,157,0.1), rgba(192,56,90,0.07))",
               border: "1px solid rgba(255,107,157,0.2)",
@@ -247,7 +247,7 @@ export default function MusicPlayer() {
             {/* Progress */}
             <div className="mb-5">
               <div
-                className="h-1 rounded-full overflow-hidden cursor-pointer"
+                className="h-2 sm:h-1 rounded-full overflow-hidden cursor-pointer"
                 style={{ background: "rgba(255,255,255,0.1)" }}
                 onClick={(e) => {
                   const r = e.currentTarget.getBoundingClientRect();
@@ -275,18 +275,18 @@ export default function MusicPlayer() {
               <button
                 id="music-mute-btn"
                 onClick={() => setMuted((m) => !m)}
-                className="text-white/40 hover:text-white/80 transition-colors p-1 focus-visible:ring-2 focus-visible:ring-pink-400 rounded"
+                className="text-white/40 hover:text-white/80 transition-colors p-2.5 -m-1.5 focus-visible:ring-2 focus-visible:ring-pink-400 rounded"
                 aria-label={muted ? "Unmute" : "Mute"}
               >
                 {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
               </button>
 
               {/* Playback controls */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 sm:gap-4">
                 <button
                   id="music-prev-btn"
                   onClick={prev}
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all focus-visible:ring-2 focus-visible:ring-pink-400"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all focus-visible:ring-2 focus-visible:ring-pink-400"
                   aria-label="Previous track"
                 >
                   <SkipBack size={18} />
@@ -312,7 +312,7 @@ export default function MusicPlayer() {
                 <button
                   id="music-next-btn"
                   onClick={next}
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all focus-visible:ring-2 focus-visible:ring-pink-400"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all focus-visible:ring-2 focus-visible:ring-pink-400"
                   aria-label="Next track"
                 >
                   <SkipForward size={18} />
@@ -371,7 +371,7 @@ export default function MusicPlayer() {
                       {t.title}
                     </p>
                     <p
-                      className="text-[11px] truncate"
+                      className="text-xs truncate"
                       style={{ color: "rgba(255,255,255,0.35)", fontFamily: "var(--font-body)" }}
                     >
                       {t.artist}

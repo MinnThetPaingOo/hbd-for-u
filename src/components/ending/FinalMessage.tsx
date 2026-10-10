@@ -20,7 +20,7 @@ interface Star {
 }
 
 function generateStars(): Star[] {
-  const emojis = ["⭐", "🌟", "💫", "✨", "🌸", "💗", "💖", "🌹"];
+  const emojis = ["🎈", "🌟", "🎉", "✨", "🎊", "🎁", "🎂", "🎈"];
   return Array.from({ length: 24 }, (_, i) => ({
     id: i,
     emoji: emojis[i % emojis.length],
@@ -34,9 +34,9 @@ function generateStars(): Star[] {
 
 // ─── Cinematic ending lines ───────────────────────────────────
 const endingLines = [
-  { text: "I love you today,", delay: 0.2 },
-  { text: "tomorrow,", delay: 0.55 },
-  { text: "and forever.", delay: 0.9 },
+  { text: "Here's to you,", delay: 0.2 },
+  { text: "to another year,", delay: 0.55 },
+  { text: "and all your wishes.", delay: 0.9 },
 ];
 
 // ─── Main export ─────────────────────────────────────────────
@@ -66,7 +66,7 @@ export default function FinalMessage() {
     <section
       id="final"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen min-h-[100svh] flex items-center justify-center overflow-hidden"
       aria-label="Final birthday message"
     >
       {/* Confetti */}
@@ -161,7 +161,7 @@ export default function FinalMessage() {
         {/* Pulsing heart — tap for confetti */}
         <motion.button
           onClick={trigger}
-          className="text-[80px] md:text-[100px] leading-none mb-8 cursor-pointer bg-transparent border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 rounded-full"
+          className="text-[64px] sm:text-[80px] md:text-[100px] leading-none mb-6 sm:mb-8 cursor-pointer bg-transparent border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 rounded-full"
           aria-label="Tap to celebrate!"
           animate={{ scale: [1, 1.12, 1] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -171,7 +171,7 @@ export default function FinalMessage() {
           whileHover={{ scale: 1.18, rotate: 8 }}
           whileTap={{ scale: 0.88 }}
         >
-          💖
+          🎂
         </motion.button>
 
         {/* Cinematic title — three lines */}
@@ -179,7 +179,7 @@ export default function FinalMessage() {
           {endingLines.map((line, i) => (
             <motion.p
               key={i}
-              className="font-black leading-tight text-[clamp(2rem,7vw,5rem)]"
+              className="font-black leading-tight text-[clamp(1.75rem,8vw,5rem)]"
               style={{
                 fontFamily: "var(--font-heading)",
                 background: "linear-gradient(135deg, #fff5f7 0%, #ff6b9d 50%, #ffd1dc 100%)",
@@ -199,7 +199,7 @@ export default function FinalMessage() {
 
         {/* Sub-heading */}
         <motion.h2
-          className="text-[clamp(1.5rem,5vw,3rem)] font-bold italic mb-3"
+          className="text-[clamp(1.35rem,5.5vw,3rem)] font-bold italic mb-3"
           style={{
             fontFamily: "var(--font-heading)",
             background: "linear-gradient(135deg, #d4a017, #f5d788)",
@@ -211,7 +211,7 @@ export default function FinalMessage() {
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 1.2, duration: 0.7 }}
         >
-          ❤️ Happy Birthday ❤️
+          🎂 Happy Birthday 🎂
         </motion.h2>
 
         {/* Divider */}
@@ -232,16 +232,16 @@ export default function FinalMessage() {
           transition={{ delay: 1.6, duration: 0.7 }}
         >
           {birthdayConfig.name}, I hope this little world I built for you shows
-          even a fraction of how much I love you. Words can never be enough, but
-          my love for you is endless. Thank you for being the most beautiful part
-          of my life. 🌹
+          even a fraction of how special you are. May this new year bring you
+          laughter, adventure and everything you wish for. Thank you for being
+          you. 🎉
         </motion.p>
 
         {/* Celebrate button */}
         <motion.button
           id="final-celebrate-btn"
           onClick={trigger}
-          className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-semibold text-base md:text-lg text-white cursor-pointer border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-base md:text-lg text-white cursor-pointer border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           style={{
             background: "linear-gradient(135deg, #ff6b9d 0%, #c0385a 100%)",
             fontFamily: "var(--font-body)",
@@ -278,7 +278,7 @@ export default function FinalMessage() {
             className="text-[11px]"
             style={{ color: "rgba(255,255,255,0.18)", fontFamily: "var(--font-body)" }}
           >
-            Happy Birthday, {birthdayConfig.name} 🌹
+            Happy Birthday, {birthdayConfig.name} 🎈
           </p>
         </motion.div>
       </div>

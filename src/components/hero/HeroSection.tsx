@@ -5,6 +5,7 @@ import { TypeAnimation } from "react-type-animation";
 import { useEffect, useRef, useState, useCallback } from "react";
 import ReactConfetti from "react-confetti";
 import { useConfetti } from "@/hooks/useConfetti";
+import { birthdayConfig } from "@/data/birthday";
 
 // ─── Types ───────────────────────────────────────────────────
 interface FloatingElement {
@@ -18,7 +19,15 @@ interface FloatingElement {
 }
 
 // ─── Constants ───────────────────────────────────────────────
-const BG_EMOJIS = ["💗", "🌸", "✨", "💕", "⭐", "💫", "🌹", "💖", "🌺", "⭐", "🌸", "💓"];
+const BG_EMOJIS = ["🎈", "🎉", "✨", "🎂", "⭐", "🎁", "🎈", "💖", "🎊", "⭐", "🎈", "🎀"];
+
+// Constant so the typewriter never restarts — her name always comes first
+const TYPED_LINES = [
+  `${birthdayConfig.name} 🎈`, 3600,
+  "Cheers to you 🥂", 2400,
+  "Another year of you ✨", 2400,
+  "Make a wish 🎂", 2400,
+];
 
 function generateElements(): FloatingElement[] {
   return Array.from({ length: 20 }, (_, i) => ({
@@ -39,11 +48,16 @@ const container = {
 };
 const item = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] } },
 };
 
 // ─── Component ───────────────────────────────────────────────
-export default function HeroSection() {
+interface HeroSectionProps {
+  /** false while the loading screen is covering the page; typing + confetti wait for true */
+  ready?: boolean;
+}
+
+export default function HeroSection({ ready = true }: HeroSectionProps) {
   const [elements] = useState<FloatingElement[]>(generateElements);
   const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
   const [mounted, setMounted] = useState(false);
@@ -63,13 +77,13 @@ export default function HeroSection() {
     const update = () => setWindowSize({ w: window.innerWidth, h: window.innerHeight });
     update();
     window.addEventListener("resize", update);
-    // Auto-fire confetti after a brief pause
-    const t = setTimeout(trigger, 1800);
-    return () => {
-      window.removeEventListener("resize", update);
-      clearTimeout(t);
-    };
-  }, [trigger]);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Fire confetti the instant the loading screen is gone and the hero appears
+  useEffect(() => {
+    if (ready) trigger();
+  }, [ready, trigger]);
 
   const scrollDown = useCallback(() => {
     document.getElementById("timeline")?.scrollIntoView({ behavior: "smooth" });
@@ -79,7 +93,7 @@ export default function HeroSection() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen min-h-[100svh] flex flex-col items-center justify-center overflow-hidden"
       aria-label="Birthday hero section"
     >
       {/* ── Confetti ── */}
@@ -153,7 +167,7 @@ export default function HeroSection() {
 
       {/* ── Floating background hearts / sparkles ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        {mounted && elements.map((el) => (
+        {ready && mounted && elements.map((el) => (
           <motion.span
             key={el.id}
             className="absolute"
@@ -178,7 +192,7 @@ export default function HeroSection() {
 
       {/* ── Main content ── */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center px-5 py-24 max-w-3xl mx-auto"
+        className="relative z-10 flex flex-col items-center text-center px-5 py-20 sm:py-24 max-w-3xl mx-auto w-full"
         style={{ y: contentY, opacity }}
         variants={container}
         initial="hidden"
@@ -187,7 +201,7 @@ export default function HeroSection() {
         {/* Badge */}
         <motion.div
           variants={item}
-          className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full mb-8 text-xs font-semibold tracking-widest uppercase"
+          className="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 rounded-full mb-6 sm:mb-8 text-[11px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-widest uppercase"
           style={{
             background: "rgba(255,107,157,0.12)",
             border: "1px solid rgba(255,107,157,0.3)",
@@ -196,16 +210,16 @@ export default function HeroSection() {
             backdropFilter: "blur(12px)",
           }}
         >
-          <span aria-hidden="true">✨</span>
-          A Special Day
-          <span aria-hidden="true">✨</span>
+          <span aria-hidden="true">🎉</span>
+          It&apos;s Your Birthday
+          <span aria-hidden="true">🎉</span>
         </motion.div>
 
         {/* Pulsing heart — clickable for confetti */}
         <motion.button
           variants={item}
           onClick={trigger}
-          className="text-[80px] md:text-[100px] leading-none mb-6 cursor-pointer bg-transparent border-0 outline-none focus-visible:outline-2 focus-visible:outline-pink-400 focus-visible:outline-offset-4 rounded-full"
+          className="text-[64px] sm:text-[80px] md:text-[100px] leading-none mb-4 sm:mb-6 cursor-pointer bg-transparent border-0 outline-none focus-visible:outline-2 focus-visible:outline-pink-400 focus-visible:outline-offset-4 rounded-full"
           aria-label="Tap to celebrate!"
           whileHover={{ scale: 1.12, rotate: 5 }}
           whileTap={{ scale: 0.88 }}
@@ -214,13 +228,13 @@ export default function HeroSection() {
             scale: { duration: 1.4, repeat: Infinity, ease: "easeInOut" },
           }}
         >
-          💖
+          🎂
         </motion.button>
 
         {/* Main title */}
         <motion.h1
           variants={item}
-          className="font-black leading-[1.1] mb-4 text-[clamp(2.4rem,8vw,5.5rem)]"
+          className="font-black leading-[1.1] mb-4 text-[clamp(2.2rem,9vw,5.5rem)]"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           <span
@@ -240,7 +254,7 @@ export default function HeroSection() {
         {/* Type animation sub-title */}
         <motion.div
           variants={item}
-          className="text-[clamp(1.3rem,4vw,2.4rem)] font-semibold italic mb-6 min-h-[2.5em]"
+          className="text-[clamp(1.15rem,4.5vw,2.4rem)] font-semibold italic mb-5 sm:mb-6 min-h-[2.6em]"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           <span
@@ -251,28 +265,28 @@ export default function HeroSection() {
               backgroundClip: "text",
             }}
           >
-            <TypeAnimation
-              sequence={[
-                "My Love ❤️", 2400,
-                "My Everything 💕", 2400,
-                "My Universe ✨", 2400,
-                "My Whole Heart 💖", 2400,
-              ]}
-              speed={42}
-              repeat={Infinity}
-            />
+            {ready ? (
+              <TypeAnimation
+                sequence={TYPED_LINES}
+                speed={42}
+                repeat={Infinity}
+              />
+            ) : (
+              // Reserve the line so the layout doesn't jump when typing starts
+              <span aria-hidden="true">&nbsp;</span>
+            )}
           </span>
         </motion.div>
 
         {/* Subtitle copy */}
         <motion.p
           variants={item}
-          className="text-[clamp(0.9rem,2.5vw,1.15rem)] leading-[1.9] max-w-[520px] mb-12"
+          className="text-[clamp(0.95rem,2.5vw,1.15rem)] leading-[1.8] max-w-[520px] text-balance mb-10 sm:mb-12"
           style={{ fontFamily: "var(--font-body)", color: "rgba(255,245,247,0.65)" }}
         >
-          Every moment with you is my favorite memory.
+          Today the world got a little brighter, because you were born.
           <br />
-          Today I celebrate the most beautiful person in my world.
+          This whole day is yours, so let&apos;s celebrate you.
         </motion.p>
 
         {/* CTA Button */}
@@ -280,7 +294,7 @@ export default function HeroSection() {
           variants={item}
           id="hero-begin-btn"
           onClick={scrollDown}
-          className="relative px-10 py-4 rounded-full font-semibold text-base md:text-lg text-white overflow-hidden cursor-pointer border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          className="relative px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-base md:text-lg text-white overflow-hidden cursor-pointer border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           style={{
             background: "linear-gradient(135deg, #ff6b9d 0%, #c0385a 100%)",
             fontFamily: "var(--font-body)",
@@ -291,7 +305,7 @@ export default function HeroSection() {
             boxShadow: "0 0 56px rgba(255,107,157,0.65), 0 8px 28px rgba(0,0,0,0.3)",
           }}
           whileTap={{ scale: 0.94 }}
-          aria-label="Begin our journey — scroll to timeline"
+          aria-label="Start the celebration — scroll to timeline"
         >
           {/* Shimmer overlay */}
           <motion.span
@@ -304,7 +318,7 @@ export default function HeroSection() {
             animate={{ backgroundPosition: ["-200% center", "200% center"] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
           />
-          <span className="relative z-10">Begin Our Journey ↓</span>
+          <span className="relative z-10">Start the Celebration ↓</span>
         </motion.button>
       </motion.div>
 
@@ -331,7 +345,7 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Decorative corner sparkles */}
-      {["✨", "🌟", "💫", "⭐"].map((s, i) => (
+      {["🎈", "🎊", "🎈", "🎉"].map((s, i) => (
         <motion.span
           key={i}
           className="absolute pointer-events-none select-none text-xl md:text-2xl"

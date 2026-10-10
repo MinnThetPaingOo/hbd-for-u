@@ -23,6 +23,7 @@ import MemoryGallery from "@/components/gallery/MemoryGallery";
 import LoveLetter from "@/components/letter/LoveLetter";
 import ReasonsILoveYou from "@/components/reasons/ReasonsILoveYou";
 import BirthdayCountdown from "@/components/countdown/BirthdayCountdown";
+import BirthdayCake from "@/components/cake/BirthdayCake";
 import MusicPlayer from "@/components/music/MusicPlayer";
 import SurpriseGift from "@/components/surprise/SurpriseGift";
 import FinalMessage from "@/components/ending/FinalMessage";
@@ -64,7 +65,7 @@ export default function Home() {
         id="main-content"
       >
         {/* 1. Hero */}
-        <HeroSection />
+        <HeroSection ready={!loading} />
 
         {/* 2. Love Timeline */}
         <LoveTimeline />
@@ -75,14 +76,17 @@ export default function Home() {
         {/* 4. Love Letter */}
         <LoveLetter />
 
-        {/* 5. Reasons I Love You */}
-        <ReasonsILoveYou />
+        {/* 5. Reasons I Love You — temporarily hidden */}
+        {/* <ReasonsILoveYou /> */}
 
-        {/* 6. Birthday Countdown */}
-        <BirthdayCountdown />
+        {/* 6. Birthday Countdown — temporarily hidden */}
+        {/* <BirthdayCountdown /> */}
 
-        {/* 7. Music Player */}
-        <MusicPlayer />
+        {/* 6b. Cake & wish */}
+        <BirthdayCake />
+
+        {/* 7. Music Player — temporarily hidden */}
+        {/* <MusicPlayer /> */}
 
         {/* 8. Surprise Gift */}
         <SurpriseGift />

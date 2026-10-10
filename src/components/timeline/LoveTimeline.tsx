@@ -18,38 +18,38 @@ interface TimelineEvent {
 const events: TimelineEvent[] = [
   {
     id: 1,
-    date: "The Beginning",
-    title: "First Meeting",
+    date: "The Day You Arrived",
+    title: "A Star Was Born",
     description:
-      "The moment I saw you, something inside me shifted. Your smile lit up the entire room and I knew — this person is extraordinary. That moment changed everything.",
-    emoji: "✨",
+      "On this day, the world gained someone extraordinary. Everything good that came after started with you arriving in it.",
+    emoji: "👶",
     color: "#FF6B9D",
   },
   {
     id: 2,
-    date: "Our First Date",
-    title: "First Date",
+    date: "Growing Up",
+    title: "Becoming You",
     description:
-      "Every second felt magical. We talked for hours and I didn't want the night to end. You were even more beautiful than I remembered, and even kinder.",
-    emoji: "🌹",
+      "Every year shaped your kindness, your humor and your strength. The person you are today is something to be proud of.",
+    emoji: "🌱",
     color: "#C0385A",
   },
   {
     id: 3,
-    date: "First Adventure",
-    title: "First Trip Together",
+    date: "This Past Year",
+    title: "Your Best Moments",
     description:
-      "Exploring a new place with you showed me a whole new world. Your excitement, your wonder — you make every destination feel like paradise.",
-    emoji: "🌍",
+      "The laughs, the wins, the adventures and even the tough days you got through. You handled all of it with grace.",
+    emoji: "🌟",
     color: "#D4A017",
   },
   {
     id: 4,
-    date: "My Favorite Day",
-    title: "Favorite Memory",
+    date: "Right Now",
+    title: "Exactly Who You Are",
     description:
-      "We didn't do anything extraordinary — but laughing with you, in that moment, I realized this is what happiness feels like. Ordinary days become extraordinary with you.",
-    emoji: "💕",
+      "Warm, brave, funny and wonderfully yourself. Not one thing about you needs to change.",
+    emoji: "🎈",
     color: "#FFD1DC",
   },
   {
@@ -57,7 +57,7 @@ const events: TimelineEvent[] = [
     date: "Today",
     title: "Happy Birthday! 🎂",
     description:
-      "Today I celebrate you — your laughter, your heart, your beauty, your spirit. Every day with you has been a gift. Here's to you, my love. Happy Birthday.",
+      "Today is all about you: your laughter, your heart and your spirit. Here's to a new year full of everything you wish for.",
     emoji: "🎂",
     color: "#F5D788",
   },
@@ -107,14 +107,14 @@ function TimelineCard({
       className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-0 mb-16 md:mb-20 ${
         isLeft ? "md:flex-row" : "md:flex-row-reverse"
       }`}
-      initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
+      initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       {/* Card */}
       <div className={`w-full md:w-[46%] ${isLeft ? "md:pr-10" : "md:pl-10"}`}>
         <motion.div
-          className="p-6 md:p-8 rounded-2xl relative overflow-hidden group cursor-default"
+          className="p-5 sm:p-6 md:p-8 rounded-2xl relative overflow-hidden group cursor-default"
           style={{
             background: "rgba(255,255,255,0.055)",
             border: `1px solid ${event.color}30`,
@@ -133,7 +133,7 @@ function TimelineCard({
           <div className="flex items-center gap-3 mb-4 flex-wrap">
             <span className="text-3xl" aria-hidden="true">{event.emoji}</span>
             <span
-              className="text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full"
+              className="text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase px-3 py-1 rounded-full"
               style={{
                 background: `${event.color}18`,
                 color: event.color,
@@ -213,7 +213,7 @@ function SectionHeader() {
         className="text-xs tracking-[0.25em] uppercase font-semibold mb-3"
         style={{ color: "#ff6b9d", fontFamily: "var(--font-body)" }}
       >
-        Our Beautiful Journey
+        Your Story
       </p>
       <h2
         className="font-black leading-tight mb-5 text-[clamp(2rem,6vw,4rem)]"
@@ -226,7 +226,7 @@ function SectionHeader() {
           backgroundClip: "text",
         }}
       >
-        Our Love Story
+        Another Year of You
       </h2>
       <div
         className="w-20 h-0.5 mx-auto rounded-full"

@@ -28,7 +28,7 @@ export default function FloatingHearts() {
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none overflow-hidden z-0"
+      className="fixed inset-0 pointer-events-none overflow-hidden z-[5]"
       aria-hidden="true"
     >
       {hearts.map((heart) => (
@@ -53,7 +53,7 @@ export default function FloatingHearts() {
             ease: "linear",
           }}
         >
-          💗
+          {heart.id % 3 === 0 ? "💗" : "🎈"}
         </motion.div>
       ))}
     </div>

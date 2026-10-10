@@ -20,7 +20,7 @@ const reasons: Reason[] = [
     back: {
       title: "Your Smile",
       message:
-        "Every time you smile, the entire world gets a little brighter. It's the first thing I look for every morning.",
+        "Every time you smile, the whole world gets a little brighter. It's contagious.",
     },
     color: "#FF6B9D",
   },
@@ -30,7 +30,7 @@ const reasons: Reason[] = [
     back: {
       title: "Your Kindness",
       message:
-        "You have the biggest heart of anyone I know. The way you care for others — effortlessly and genuinely.",
+        "You have one of the biggest hearts around. The way you care for others is effortless and genuine.",
     },
     color: "#C0385A",
   },
@@ -40,7 +40,7 @@ const reasons: Reason[] = [
     back: {
       title: "Your Laugh",
       message:
-        "Your laugh is contagious and pure joy. It fills every room and wraps around my heart completely.",
+        "Your laugh is contagious and pure joy. It fills every room with happiness.",
     },
     color: "#D4A017",
   },
@@ -50,7 +50,7 @@ const reasons: Reason[] = [
     back: {
       title: "Your Support",
       message:
-        "You are my biggest cheerleader. In every challenge, every doubt — you've always been there lifting me up.",
+        "You're a true cheerleader. In every challenge and doubt, you're there lifting others up.",
     },
     color: "#FF6B9D",
   },
@@ -60,7 +60,7 @@ const reasons: Reason[] = [
     back: {
       title: "Your Strength",
       message:
-        "You face every challenge with grace and determination. You inspire me to be stronger every single day.",
+        "You face every challenge with grace and determination. You inspire everyone around you.",
     },
     color: "#C0385A",
   },
@@ -70,7 +70,7 @@ const reasons: Reason[] = [
     back: {
       title: "Your Intelligence",
       message:
-        "The way your mind works — curious, thoughtful, creative — never stops amazing me. Our conversations are my favorite.",
+        "The way your mind works — curious, thoughtful, creative — never stops impressing. Talking with you is the best.",
     },
     color: "#D4A017",
   },
@@ -80,7 +80,7 @@ const reasons: Reason[] = [
     back: {
       title: "Your Passion",
       message:
-        "Whatever you care about, you throw yourself into completely. Your dedication is one of the most attractive things about you.",
+        "Whatever you care about, you throw yourself into completely. Your dedication is a big part of what makes you shine.",
     },
     color: "#FF6B9D",
   },
@@ -90,7 +90,7 @@ const reasons: Reason[] = [
     back: {
       title: "Simply Being You",
       message:
-        "No list could ever capture every reason. You are the reason. Every quirk, every flaw, every wonderful thing — all of it.",
+        "No list could capture every reason. Every quirk and every wonderful thing adds up to you.",
     },
     color: "#C0385A",
   },
@@ -136,8 +136,8 @@ function FlipCard({ reason }: { reason: Reason }) {
 
   return (
     <div
-      className="relative"
-      style={{ perspective: "1000px", height: "200px" }}
+      className="relative h-[250px] min-[400px]:h-[230px] sm:h-[215px]"
+      style={{ perspective: "1000px" }}
       role="button"
       tabIndex={0}
       aria-label={`Flip card: ${reason.front.label}`}
@@ -153,7 +153,7 @@ function FlipCard({ reason }: { reason: Reason }) {
       >
         {/* Front */}
         <div
-          className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center gap-3 p-4"
+          className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center gap-2 sm:gap-3 p-3 sm:p-4"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -162,7 +162,7 @@ function FlipCard({ reason }: { reason: Reason }) {
             backdropFilter: "blur(20px)",
           }}
         >
-          <span className="text-5xl" aria-hidden="true">{reason.front.emoji}</span>
+          <span className="text-4xl sm:text-5xl" aria-hidden="true">{reason.front.emoji}</span>
           <p
             className="text-base font-bold text-center"
             style={{ fontFamily: "var(--font-heading)", color: reason.color }}
@@ -170,7 +170,7 @@ function FlipCard({ reason }: { reason: Reason }) {
             {reason.front.label}
           </p>
           <p
-            className="text-[10px] tracking-widest uppercase"
+            className="text-[11px] tracking-widest uppercase"
             style={{ color: "rgba(255,255,255,0.35)", fontFamily: "var(--font-body)" }}
           >
             Tap to reveal
@@ -179,7 +179,7 @@ function FlipCard({ reason }: { reason: Reason }) {
 
         {/* Back */}
         <div
-          className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center gap-3 p-5 text-center"
+          className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center gap-1.5 sm:gap-3 p-3 sm:p-5 text-center"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -197,8 +197,8 @@ function FlipCard({ reason }: { reason: Reason }) {
             {reason.back.title}
           </p>
           <p
-            className="text-xs leading-relaxed"
-            style={{ color: "rgba(255,245,247,0.72)", fontFamily: "var(--font-body)" }}
+            className="text-[12.5px] sm:text-xs leading-snug sm:leading-relaxed"
+            style={{ color: "rgba(255,245,247,0.8)", fontFamily: "var(--font-body)" }}
           >
             {reason.back.message}
           </p>
@@ -276,7 +276,7 @@ export default function ReasonsILoveYou() {
             className="text-xs tracking-[0.25em] uppercase font-semibold mb-3"
             style={{ color: "#ff6b9d", fontFamily: "var(--font-body)" }}
           >
-            Endless Reasons
+            Celebrating You
           </p>
           <h2
             className="font-black leading-tight mb-3 text-[clamp(2rem,6vw,4rem)]"
@@ -288,7 +288,7 @@ export default function ReasonsILoveYou() {
               backgroundClip: "text",
             }}
           >
-            Why I Love You
+            Why You&apos;re Amazing
           </h2>
           <p
             className="text-sm mb-5 max-w-md mx-auto"

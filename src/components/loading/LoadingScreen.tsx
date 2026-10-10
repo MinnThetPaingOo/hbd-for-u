@@ -19,7 +19,7 @@ interface LoadingScreenProps {
 }
 
 // ─── Constants ───────────────────────────────────────────────
-const EMOJIS = ["💗", "💕", "✨", "🌸", "💖", "⭐", "💫", "🌹"];
+const EMOJIS = ["🎈", "🎉", "✨", "🎂", "🎁", "⭐", "🎊", "🎈"];
 const PARTICLE_COUNT = 18;
 const LOAD_DURATION_MS = 3200;
 
@@ -39,13 +39,15 @@ function generateParticles(): Particle[] {
 export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<"loading" | "done">("loading");
-  const [particles] = useState<Particle[]>(generateParticles);
+  // Random values must be generated after mount, or server and client HTML differ
+  const [particles, setParticles] = useState<Particle[]>([]);
+  useEffect(() => setParticles(generateParticles()), []);
   const [messageIdx, setMessageIdx] = useState(0);
 
   const messages = [
-    "Loading Our Memories...",
-    "Filling the air with love...",
-    "Almost ready, my darling...",
+    "Blowing up the balloons...",
+    "Wrapping your presents...",
+    "Almost party time...",
   ];
 
   const handleComplete = useCallback(() => {
@@ -198,7 +200,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            My Love 💕
+            Thae 💕
           </motion.p>
 
           {/* ── Progress bar ── */}

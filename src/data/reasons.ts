@@ -6,7 +6,7 @@ export const reasons: Reason[] = [
     number: "01",
     title: "Your Smile",
     description:
-      "Every time you smile, the entire world gets a little brighter. It's the first thing I look for every morning and the last thing I think about at night.",
+      "Every time you smile, the whole room gets a little brighter. It's contagious, and everyone around you is better for it.",
     emoji: "😊",
   },
   {
@@ -14,7 +14,7 @@ export const reasons: Reason[] = [
     number: "02",
     title: "Your Kindness",
     description:
-      "You have the biggest heart of anyone I know. The way you care for others — effortlessly and genuinely — makes me fall in love with you more every single day.",
+      "You have one of the biggest hearts around. The way you care for others, effortlessly and genuinely, makes the world a softer place.",
     emoji: "💝",
   },
   {
@@ -22,7 +22,7 @@ export const reasons: Reason[] = [
     number: "03",
     title: "Your Strength",
     description:
-      "You face every challenge with grace and determination. You inspire me to be stronger, braver, and better. You are quietly powerful in the most beautiful way.",
+      "You face every challenge with grace and determination. You're quietly powerful in the most beautiful way, and you inspire the people around you.",
     emoji: "⚡",
   },
   {
@@ -30,23 +30,23 @@ export const reasons: Reason[] = [
     number: "04",
     title: "Your Laughter",
     description:
-      "Your laugh is contagious and pure joy. It fills every room and wraps around my heart. I would do anything to hear it every single day for the rest of my life.",
+      "Your laugh is pure joy. It fills every room, and a day with it in it is always a better day.",
     emoji: "✨",
   },
   {
     id: 5,
     number: "05",
-    title: "Your Intelligence",
+    title: "Your Mind",
     description:
-      "The way your mind works — curious, thoughtful, creative — never stops amazing me. Our conversations are my favorite part of any day.",
+      "The way you think, curious, thoughtful and creative, never stops being impressive. Talking with you is the best part of any day.",
     emoji: "🧠",
   },
   {
     id: 6,
     number: "06",
-    title: "How You Love",
+    title: "Your Big Heart",
     description:
-      "You love with your whole heart, without conditions or hesitation. Being loved by you is the greatest privilege of my life. I don't take a single moment for granted.",
+      "You give your whole heart without conditions or hesitation. The people in your life are lucky to have you.",
     emoji: "💖",
   },
   {
@@ -54,7 +54,7 @@ export const reasons: Reason[] = [
     number: "07",
     title: "Your Passion",
     description:
-      "Whatever you care about, you throw yourself into completely. Your dedication and enthusiasm for the things you love is one of the most attractive things about you.",
+      "Whatever you care about, you throw yourself into completely. Your dedication and enthusiasm are a big part of what makes you shine.",
     emoji: "🔥",
   },
   {
@@ -62,7 +62,7 @@ export const reasons: Reason[] = [
     number: "08",
     title: "Simply Being You",
     description:
-      "No list could ever capture every reason. You are the reason. Every quirk, every flaw, every wonderful thing — all of it. I love every single part of you.",
+      "No list could ever capture every reason. Every quirk and every wonderful thing about you adds up to someone worth celebrating today and every day.",
     emoji: "🌟",
   },
 ];

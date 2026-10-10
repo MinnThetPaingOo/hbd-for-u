@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 
@@ -17,14 +17,19 @@ const poppins = Poppins({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0d0007",
+};
+
 export const metadata: Metadata = {
-  title: "Happy Birthday, My Love 💖",
-  description:
-    "A heartfelt birthday celebration website crafted with love — just for you, my darling.",
-  keywords: ["happy birthday", "love", "celebration", "romantic"],
+  title: "Happy Birthday! 🎂",
+  description: "A birthday celebration website made just for you.",
+  keywords: ["happy birthday", "celebration", "surprise"],
   openGraph: {
-    title: "Happy Birthday, My Love 💖",
-    description: "A heartfelt birthday celebration website crafted with love.",
+    title: "Happy Birthday! 🎂",
+    description: "A birthday celebration website made just for you.",
     type: "website",
   },
 };

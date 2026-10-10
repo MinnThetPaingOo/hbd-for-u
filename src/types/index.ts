@@ -31,6 +31,7 @@ export interface Reason {
 export interface BirthdayConfig {
   name: string;
   birthday: Date;
+  birthDate: Date; // full date of birth, used to compute age and stats
   loveLetterLines: string[];
   surpriseMessage: string;
   surpriseReveal: string;

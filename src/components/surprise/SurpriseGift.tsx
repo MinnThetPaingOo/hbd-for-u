@@ -139,8 +139,8 @@ export default function SurpriseGift() {
       <motion.div
         className="absolute rounded-full blur-3xl pointer-events-none"
         style={{
-          width: "500px",
-          height: "500px",
+          width: "min(500px, 100vw)",
+          height: "min(500px, 100vw)",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
@@ -279,7 +279,7 @@ export default function SurpriseGift() {
                 transition={{ type: "spring", stiffness: 200, damping: 18 }}
               >
                 <div
-                  className="rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"
+                  className="rounded-3xl p-6 sm:p-8 md:p-12 text-center relative overflow-hidden"
                   style={{
                     background: "linear-gradient(135deg, rgba(255,107,157,0.14), rgba(212,160,23,0.09))",
                     border: "1px solid rgba(255,107,157,0.28)",
@@ -309,7 +309,7 @@ export default function SurpriseGift() {
                   ))}
 
                   <motion.div
-                    className="text-7xl mb-5"
+                    className="text-6xl sm:text-7xl mb-4 sm:mb-5"
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ type: "spring", stiffness: 220, damping: 14, delay: 0.2 }}
@@ -330,7 +330,7 @@ export default function SurpriseGift() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    Your Gift, My Love! 🎀
+                    Your Birthday Gift! 🎀
                   </motion.h3>
 
                   <motion.p

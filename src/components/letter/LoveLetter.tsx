@@ -6,35 +6,35 @@ import { useRef, useState } from "react";
 
 // ─── Letter content ───────────────────────────────────────────
 const letterLines = [
-  { text: "My darling,", type: "salutation" },
+  { text: "Dear birthday girl,", type: "salutation" },
   { text: "", type: "space" },
   {
-    text: "On this beautiful day, I want you to know how incredibly special you are to me. You have changed my life in the most wonderful ways — ways I never even knew were possible.",
+    text: "Today the world celebrates the day you arrived in it, and I get to celebrate you. You make every room warmer just by walking into it.",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "Every morning I wake up grateful that you are in my life. Your smile is the first thing I think about, and your laughter is the soundtrack to my happiest memories. You make even the most ordinary days feel extraordinary.",
+    text: "Over this past year I've watched you grow, laugh, push through the hard days and shine on the good ones. Your smile is the first thing I think about, and your laughter is the soundtrack to my happiest memories.",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "I love how you see the world with such warmth and kindness. I love how passionate you are about the things you care about. I love the way you laugh at your own jokes. I love every single thing about you — even the parts you think are flaws, because to me they are just more reasons to adore you.",
+    text: "I admire how you see the world with such warmth and kindness. I love how passionate you are about the things you care about, and the way you laugh at your own jokes. Even the parts you think are flaws are part of what makes you you.",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "You deserve every happiness in the world. You deserve to be celebrated not just today, but every single day. And I promise to spend every day showing you just how much you mean to me.",
+    text: "My wish for your new year: may it bring you more joy than you can carry, dreams that come true, and people who make you feel as special as you are. You deserve to be celebrated not just today, but every single day.",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "Happy Birthday, my love. Today is your day. You are my greatest adventure, my safest place, my favorite person.",
+    text: "Happy Birthday. Today is your day. Make it a wish.",
     type: "body",
   },
   { text: "", type: "space" },
-  { text: "Forever yours,", type: "closing" },
-  { text: "The one who loves you most 💖", type: "signature" },
+  { text: "With all my love,", type: "closing" },
+  { text: "The one cheering loudest for you 🎂", type: "signature" },
 ];
 
 // ─── Envelope ─────────────────────────────────────────────────
@@ -46,7 +46,7 @@ function Envelope({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className="relative w-72 md:w-96 h-52 md:h-64 cursor-pointer border-0 bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-2xl"
+      className="relative w-[min(18rem,82vw)] md:w-96 h-52 md:h-64 cursor-pointer border-0 bg-transparent outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-2xl"
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.04 }}
@@ -128,7 +128,7 @@ function LetterBody() {
       transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
     >
       <div
-        className="rounded-3xl p-7 md:p-12"
+        className="rounded-3xl p-5 sm:p-7 md:p-12"
         style={{
           background: "rgba(255,255,255,0.07)",
           border: "1px solid rgba(212,160,23,0.22)",
@@ -165,7 +165,7 @@ function LetterBody() {
                     ? "text-base font-semibold"
                     : line.type === "closing"
                     ? "text-base text-white/70 italic"
-                    : "text-sm md:text-base leading-[1.95] text-white/72"
+                    : "text-[15px] md:text-base leading-[1.85] md:leading-[1.95] text-white/75"
                 }
                 style={{
                   fontFamily:
@@ -244,7 +244,7 @@ export default function LoveLetter() {
             className="text-xs tracking-[0.25em] uppercase font-semibold mb-3"
             style={{ color: "#d4a017", fontFamily: "var(--font-body)" }}
           >
-            Written From My Heart
+            Just For You
           </p>
           <h2
             className="font-black leading-tight mb-5 text-[clamp(2rem,6vw,4rem)]"
@@ -256,7 +256,7 @@ export default function LoveLetter() {
               backgroundClip: "text",
             }}
           >
-            A Love Letter
+            A Birthday Letter
           </h2>
           {!opened && (
             <p

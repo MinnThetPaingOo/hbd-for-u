@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import CountUp from "react-countup";
 import { useEffect, useState } from "react";
-import { birthdayConfig } from "@/data/birthday";
+import { birthdayConfig, getAge } from "@/data/birthday";
 
 // ─── Helpers ─────────────────────────────────────────────────
 function getTimeLeft(target: Date) {
@@ -43,8 +43,8 @@ function FlipDigit({ value, label }: { value: number; label: string }) {
       <div
         className="relative overflow-hidden rounded-xl flex items-center justify-center"
         style={{
-          width: "clamp(64px, 18vw, 96px)",
-          height: "clamp(72px, 20vw, 108px)",
+          width: "clamp(58px, 18vw, 96px)",
+          height: "clamp(66px, 20vw, 108px)",
           background: "linear-gradient(160deg, rgba(255,107,157,0.16), rgba(192,56,90,0.10))",
           border: "1px solid rgba(255,107,157,0.28)",
           backdropFilter: "blur(20px)",
@@ -83,7 +83,7 @@ function FlipDigit({ value, label }: { value: number; label: string }) {
         />
       </div>
       <span
-        className="text-[10px] tracking-[0.2em] uppercase font-semibold"
+        className="text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-semibold"
         style={{ color: "rgba(255,255,255,0.42)", fontFamily: "var(--font-body)" }}
       >
         {label}
@@ -106,7 +106,7 @@ function StatCard({
 }) {
   return (
     <motion.div
-      className="flex flex-col items-center gap-2 p-5 rounded-2xl"
+      className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 p-3 sm:p-5 rounded-2xl h-full"
       style={{
         background: "rgba(255,255,255,0.05)",
         border: "1px solid rgba(255,255,255,0.08)",
@@ -117,7 +117,7 @@ function StatCard({
     >
       <span className="text-3xl" aria-hidden="true">{emoji}</span>
       <span
-        className="text-2xl md:text-3xl font-black"
+        className="text-xl sm:text-2xl md:text-3xl font-black break-all text-center"
         style={{
           fontFamily: "var(--font-heading)",
           background: "linear-gradient(135deg, #ff6b9d, #c0385a)",
@@ -141,7 +141,7 @@ function StatCard({
         )}
       </span>
       <span
-        className="text-[11px] tracking-wide text-center"
+        className="text-xs tracking-wide text-center leading-snug"
         style={{ color: "rgba(255,255,255,0.45)", fontFamily: "var(--font-body)" }}
       >
         {label}
@@ -152,18 +152,18 @@ function StatCard({
 
 // ─── Main export ─────────────────────────────────────────────
 export default function BirthdayCountdown() {
-  const { birthday, statsStartDate } = birthdayConfig;
+  const { birthday, birthDate } = birthdayConfig;
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isToday, setIsToday] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
 
-  const daysTogether = daysBetween(statsStartDate, new Date());
+  const daysAlive = daysBetween(birthDate, new Date());
   const stats = [
-    { emoji: "💕", value: daysTogether, label: "Days Together" },
-    { emoji: "😊", value: daysTogether * 11, label: "Smiles Given" },
-    { emoji: "🤗", value: daysTogether * 3, label: "Hugs Shared" },
-    { emoji: "💖", value: daysTogether * 7, label: "I Love Yous" },
+    { emoji: "🎂", value: getAge(), label: "Years of You" },
+    { emoji: "🌍", value: daysAlive, label: "Days of Being Awesome" },
+    { emoji: "⏰", value: daysAlive * 24, label: "Hours of Shining" },
+    { emoji: "🎈", value: getAge(), label: "Birthdays Worth Celebrating" },
   ];
 
   useEffect(() => {
@@ -187,7 +187,7 @@ export default function BirthdayCountdown() {
         padding: "clamp(4rem, 10vw, 8rem) 0",
         background: "linear-gradient(180deg, #0d0007 0%, #200515 50%, #0d0007 100%)",
       }}
-      aria-label="Birthday countdown and love statistics"
+      aria-label="Birthday countdown and age statistics"
     >
       {/* Ambient */}
       <div
@@ -240,7 +240,7 @@ export default function BirthdayCountdown() {
         >
           {isToday ? (
             <div
-              className="text-center p-8 md:p-12 rounded-3xl max-w-md w-full"
+              className="text-center p-6 sm:p-8 md:p-12 rounded-3xl max-w-md w-full"
               style={{
                 background: "rgba(255,107,157,0.1)",
                 border: "1px solid rgba(255,107,157,0.3)",
@@ -276,7 +276,7 @@ export default function BirthdayCountdown() {
             </div>
           ) : (
             <div
-              className="flex flex-wrap justify-center gap-3 md:gap-5"
+              className="flex justify-center gap-2 sm:gap-3 md:gap-5"
               role="timer"
               aria-label="Time until next birthday"
             >
@@ -304,6 +304,7 @@ export default function BirthdayCountdown() {
           {stats.map((s) => (
             <motion.div
               key={s.label}
+              className="h-full"
               variants={{
                 hidden: { opacity: 0, y: 24 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
