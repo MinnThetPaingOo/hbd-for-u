@@ -240,7 +240,10 @@ export default function FinalMessage() {
         {/* Celebrate button */}
         <motion.button
           id="final-celebrate-btn"
-          onClick={trigger}
+          onClick={() => {
+            trigger();
+            document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+          }}
           className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-base md:text-lg text-white cursor-pointer border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
           style={{
             background: "linear-gradient(135deg, #ff6b9d 0%, #c0385a 100%)",
@@ -252,7 +255,7 @@ export default function FinalMessage() {
           transition={{ delay: 1.9, duration: 0.6 }}
           whileHover={{ scale: 1.07, boxShadow: "0 0 60px rgba(255,107,157,0.6)" }}
           whileTap={{ scale: 0.93 }}
-          aria-label="Celebrate again with confetti"
+          aria-label="Celebrate again and return to the top"
         >
           <Heart size={18} fill="currentColor" aria-hidden="true" />
           Celebrate Again! 🎉

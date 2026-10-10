@@ -84,7 +84,7 @@ export default function BirthdayCake() {
             className="text-base md:text-lg mb-12 max-w-md mx-auto leading-[2.1]"
             style={{ color: "rgba(255,245,247,0.75)", fontFamily: "var(--font-body)" }}
           >
-            မျက်လုံးကိုမှိတ်ပြီး ဆုတောင်းလိုက်ပါ၊ ပြီးရင် ဖယောင်းတိုင်တွေကို နှိပ်ပြီး မှုတ်ပစ်လိုက်ပါ။
+            မျက်လုံးကိုမှိတ်ပြီး ဆုတောင်းလိုက်ပါ၊ ပြီးရင် ဖယောင်းတိုင်တွေကို နှိပ်ပြီး မှုတ်လိုက်ပါ။
           </p>
         </motion.div>
 
@@ -185,7 +185,7 @@ export default function BirthdayCake() {
                     color: "#f5d788",
                   }}
                 >
-                  🎉 May every wish come true! 🎉
+                  🎉 ဆုတောင်းတိုင်း ပြည့်ပါစေ! 🎉
                 </p>
                 <button
                   onClick={relight}
@@ -197,7 +197,7 @@ export default function BirthdayCake() {
                     fontFamily: "var(--font-body)",
                   }}
                 >
-                  ဖယောင်းတိုင်တွေကို ထပ်မီးညှိမယ်
+                  ဖယောင်းတိုင်တွေကို မီးထပ်ညှိမယ်
                 </button>
               </motion.div>
             ) : null}

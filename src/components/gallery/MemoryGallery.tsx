@@ -2,43 +2,54 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState, useCallback } from "react";
-import { X, ZoomIn } from "lucide-react";
+import { useState, useCallback, useEffect } from "react";
+import { X, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────
 interface Photo {
   id: number;
+  /** Birthday year this card celebrates */
+  year: number;
   title: string;
   caption: string;
   emoji: string;
   gradient: string;
   rotation: number;
-  imageSrc?: string;
+  /** Up to 3 photos for this year; the first one is the card cover */
+  images?: string[];
 }
 
 // ─── Data ────────────────────────────────────────────────────
 const photos: Photo[] = [
+  // TODO: set the real years/captions, and add images (up to 3 per year, e.g.
+  // "/photos/2025-1.jpg", files placed in public/photos) to show real photos
+  // instead of the emoji.
   {
     id: 1,
-    title: "Our First Selfie",
-    caption: "The beginning of forever 💫",
-    emoji: "📸",
+    year: 2024,
+    title: "Birthday 2024",
+    caption: "The first birthday we celebrated 🎂",
+    emoji: "🎂",
     gradient: "linear-gradient(135deg, #ff6b9d, #c0385a)",
     rotation: -2.5,
+    images: ["/photos/2024-1.jpg", "/photos/2024-2.jpg", "/photos/2024-3.jpg"],
   },
   {
     id: 2,
-    title: "Sunset Walks",
-    caption: "Golden hours with my golden girl 🌅",
-    emoji: "🌇",
+    year: 2025,
+    title: "Birthday 2025",
+    caption: "Another year, another wish 🎈",
+    emoji: "🎈",
     gradient: "linear-gradient(135deg, #d4a017, #f5d788, #c0385a)",
     rotation: 1.8,
+    images: ["/photos/2025-1.jpg", "/photos/2025-2.jpg", "/photos/2025-3.jpg"],
   },
   {
     id: 3,
-    title: "Late Night Talks",
-    caption: "Where all our secrets live ✨",
-    emoji: "🌙",
+    year: 2026,
+    title: "Birthday 2026",
+    caption: "Brighter than ever ✨",
+    emoji: "🎉",
     gradient: "linear-gradient(135deg, #2d0054, #7b1fa2, #8b0000)",
     rotation: -1.2,
   },
@@ -140,10 +151,10 @@ function PolaroidCard({
             background: photo.gradient,
           }}
         >
-          {photo.imageSrc ? (
+          {photo.images?.[0] ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={photo.imageSrc}
+              src={photo.images[0]}
               alt={photo.title}
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -154,6 +165,19 @@ function PolaroidCard({
               </span>
             </div>
           )}
+
+          {/* Year badge */}
+          <span
+            className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-xs font-bold"
+            style={{
+              background: "rgba(13,0,7,0.7)",
+              color: "#f5d788",
+              fontFamily: "var(--font-heading)",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            {photo.year}
+          </span>
 
           {/* Zoom icon overlay */}
           <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-300">
@@ -188,6 +212,29 @@ function Lightbox({
   photo: Photo;
   onClose: () => void;
 }) {
+  const images = photo.images ?? [];
+  const [index, setIndex] = useState(0);
+  const multi = images.length > 1;
+  const onPrev = useCallback(
+    () => setIndex((i) => (i - 1 + images.length) % images.length),
+    [images.length]
+  );
+  const onNext = useCallback(
+    () => setIndex((i) => (i + 1) % images.length),
+    [images.length]
+  );
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      else if (!multi) return;
+      else if (e.key === "ArrowLeft") onPrev();
+      else if (e.key === "ArrowRight") onNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [multi, onPrev, onNext, onClose]);
+
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -226,16 +273,56 @@ function Lightbox({
               background: photo.gradient,
             }}
           >
-            {photo.imageSrc ? (
+            {images[index] ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={photo.imageSrc}
+                key={images[index]}
+                src={images[index]}
                 alt={photo.title}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                 <span className="text-7xl" aria-hidden="true">{photo.emoji}</span>
+              </div>
+            )}
+
+            {/* Prev / next */}
+            {multi && (["prev", "next"] as const).map((dir) => (
+              <button
+                key={dir}
+                onClick={dir === "prev" ? onPrev : onNext}
+                className={`absolute top-1/2 -translate-y-1/2 ${
+                  dir === "prev" ? "left-2" : "right-2"
+                } w-10 h-10 rounded-full flex items-center justify-center border-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-pink-400`}
+                style={{
+                  background: "rgba(13,0,7,0.55)",
+                  backdropFilter: "blur(6px)",
+                  boxShadow: "0 2px 10px rgba(0,0,0,0.35)",
+                }}
+                aria-label={dir === "prev" ? "Previous photo" : "Next photo"}
+              >
+                {dir === "prev" ? (
+                  <ChevronLeft size={20} className="text-white" />
+                ) : (
+                  <ChevronRight size={20} className="text-white" />
+                )}
+              </button>
+            ))}
+
+            {/* Position dots */}
+            {multi && (
+              <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+                {images.map((src, i) => (
+                  <span
+                    key={src}
+                    className="w-1.5 h-1.5 rounded-full"
+                    style={{
+                      background: i === index ? "#fff" : "rgba(255,255,255,0.45)",
+                    }}
+                    aria-hidden="true"
+                  />
+                ))}
               </div>
             )}
           </div>
@@ -313,7 +400,7 @@ export default function MemoryGallery() {
             className="text-xs tracking-[0.25em] uppercase font-semibold mb-3"
             style={{ color: "#ff6b9d", fontFamily: "var(--font-body)" }}
           >
-            Treasured Moments
+            Year by Year
           </p>
           <h2
             className="font-black leading-tight mb-5 text-[clamp(2rem,6vw,4rem)]"
@@ -332,7 +419,7 @@ export default function MemoryGallery() {
             className="text-sm max-w-md mx-auto"
             style={{ color: "rgba(255,245,247,0.55)", fontFamily: "var(--font-body)" }}
           >
-            Little pieces of your story, worth celebrating.
+            Every birthday we've celebrated, and the one still to come.
             Tap any photo to enlarge it.
           </p>
           <div
@@ -353,7 +440,9 @@ export default function MemoryGallery() {
 
       {/* Lightbox */}
       <AnimatePresence>
-        {selected && <Lightbox photo={selected} onClose={handleClose} />}
+        {selected && (
+          <Lightbox photo={selected} onClose={handleClose} />
+        )}
       </AnimatePresence>
     </section>
   );

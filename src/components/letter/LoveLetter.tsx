@@ -6,35 +6,35 @@ import { useRef, useState } from "react";
 
 // ─── Letter content ───────────────────────────────────────────
 const letterLines = [
-  { text: "Dear birthday girl,", type: "salutation" },
+  { text: "ချစ်ရတဲ့ မွေးနေ့ပိုင်ရှင်လေးရေ၊", type: "salutation" },
   { text: "", type: "space" },
   {
-    text: "Today the world celebrates the day you arrived in it, and I get to celebrate you. You make every room warmer just by walking into it.",
+    text: "ဒီနေ့ဟာ မင်း ဒီကမ္ဘာကြီးထဲ ရောက်လာတဲ့နေ့ကို ကမ္ဘာကြီးက ကျင်းပတဲ့နေ့ပါ။ မင်းကို ကျွန်တော် ဂုဏ်ပြုခွင့်ရတာ ကျွန်တော့်အတွက် ကံကောင်းမှုပါပဲ။ မင်းဝင်လာရုံနဲ့ အခန်းတိုင်း နွေးထွေးသွားတတ်တယ်။",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "Over this past year I've watched you grow, laugh, push through the hard days and shine on the good ones. Your smile is the first thing I think about, and your laughter is the soundtrack to my happiest memories.",
+    text: "ပြီးခဲ့တဲ့ တစ်နှစ်တာအတွင်း မင်း ရင့်ကျက်လာတာ၊ ရယ်မောတာ၊ ခက်ခဲတဲ့ရက်တွေကို ကျော်ဖြတ်တာနဲ့ ကောင်းတဲ့ရက်တွေမှာ ထွန်းလင်းတောက်ပတာတွေကို ကျွန်တော် ကြည့်နေခဲ့တယ်။ မင်းရဲ့ အပြုံးက ကျွန်တော် ပထမဆုံး သတိရတဲ့အရာပါ၊ မင်းရဲ့ ရယ်သံက ကျွန်တော့်အပျော်ဆုံး မှတ်ဉာဏ်တွေရဲ့ နောက်ခံတေးသံပါပဲ။",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "I admire how you see the world with such warmth and kindness. I love how passionate you are about the things you care about, and the way you laugh at your own jokes. Even the parts you think are flaws are part of what makes you you.",
+    text: "ကမ္ဘာကြီးကို နွေးထွေးမှုနဲ့ ကြင်နာမှုနဲ့ ကြည့်တတ်တဲ့ မင်းကို ကျွန်တော် လေးစားတယ်။ မင်းဂရုစိုက်တဲ့အရာတွေအတွက် စိတ်အားထက်သန်တာနဲ့ ကိုယ့်ဟာသကို ကိုယ်တိုင်ရယ်တတ်တာတွေကိုလည်း ချစ်တယ်။ မင်းက အားနည်းချက်လို့ ထင်တဲ့အပိုင်းတွေတောင် မင်းကို မင်းဖြစ်စေတဲ့ အစိတ်အပိုင်းတွေပါပဲ။",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "My wish for your new year: may it bring you more joy than you can carry, dreams that come true, and people who make you feel as special as you are. You deserve to be celebrated not just today, but every single day.",
+    text: "မင်းရဲ့ နှစ်သစ်အတွက် ကျွန်တော့်ဆုတောင်းက - ဆောင်ယူလို့မကုန်နိုင်လောက်အောင် ပျော်ရွှင်မှုတွေ၊ ပြည့်ဝလာမယ့် အိပ်မက်တွေ၊ မင်းကို မင်းရှိသလောက် အထူးအဆန်းကောင်းတယ်လို့ ခံစားစေမယ့် လူတွေ ရရှိပါစေ။ မင်းဟာ ဒီနေ့တစ်ရက်တည်းမဟုတ်ဘဲ နေ့တိုင်း ဂုဏ်ပြုခံထိုက်တဲ့သူပါ။",
     type: "body",
   },
   { text: "", type: "space" },
   {
-    text: "Happy Birthday. Today is your day. Make it a wish.",
+    text: "မွေးနေ့မင်္ဂလာပါ။ ဒီနေ့က မင်းရဲ့နေ့ပါ။ ဆုတောင်းလိုက်ပါ။",
     type: "body",
   },
   { text: "", type: "space" },
-  { text: "With all my love,", type: "closing" },
-  { text: "The one cheering loudest for you 🎂", type: "signature" },
+  { text: "ချစ်စိတ်အပြည့်နဲ့၊", type: "closing" },
+  { text: "မင်းကို အကျယ်ဆုံး အားပေးနေသူ 🎂", type: "signature" },
 ];
 
 // ─── Envelope ─────────────────────────────────────────────────
@@ -168,10 +168,7 @@ function LetterBody() {
                     : "text-[15px] md:text-base leading-[1.85] md:leading-[1.95] text-white/75"
                 }
                 style={{
-                  fontFamily:
-                    line.type === "salutation" || line.type === "signature"
-                      ? "var(--font-heading)"
-                      : "var(--font-body)",
+                  fontFamily: "var(--font-myanmar), var(--font-body)",
                   color:
                     line.type === "salutation"
                       ? "#d4a017"

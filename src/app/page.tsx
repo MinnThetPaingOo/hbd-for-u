@@ -31,6 +31,15 @@ import FinalMessage from "@/components/ending/FinalMessage";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
+  // Always start at the hero on reload (don't restore the old scroll position or #hash)
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   // Prevent scroll during loading
   useEffect(() => {
     if (loading) {
@@ -47,7 +56,12 @@ export default function Home() {
     <>
       {/* ── Loading screen ────────────────────────────────── */}
       {loading && (
-        <LoadingScreen onComplete={() => setLoading(false)} />
+        <LoadingScreen
+          onComplete={() => {
+            window.scrollTo(0, 0);
+            setLoading(false);
+          }}
+        />
       )}
 
       {/* ── Ambient background particles (always present) ─ */}
