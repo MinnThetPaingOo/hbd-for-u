@@ -1,69 +1,95 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+
+// ─── Lazy-loaded components ───────────────────────────────────
+const LoadingScreen = dynamic(
+  () => import("@/components/loading/LoadingScreen"),
+  { ssr: false }
+);
+const FloatingHearts = dynamic(
+  () => import("@/components/common/FloatingHearts"),
+  { ssr: false }
+);
+const Sparkles = dynamic(() => import("@/components/common/Sparkles"), {
+  ssr: false,
+});
+
+// ─── Section imports (client) ─────────────────────────────────
+import HeroSection from "@/components/hero/HeroSection";
+import LoveTimeline from "@/components/timeline/LoveTimeline";
+import MemoryGallery from "@/components/gallery/MemoryGallery";
+import LoveLetter from "@/components/letter/LoveLetter";
+import ReasonsILoveYou from "@/components/reasons/ReasonsILoveYou";
+import BirthdayCountdown from "@/components/countdown/BirthdayCountdown";
+import MusicPlayer from "@/components/music/MusicPlayer";
+import SurpriseGift from "@/components/surprise/SurpriseGift";
+import FinalMessage from "@/components/ending/FinalMessage";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  // Prevent scroll during loading
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loading]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      {/* ── Loading screen ────────────────────────────────── */}
+      {loading && (
+        <LoadingScreen onComplete={() => setLoading(false)} />
+      )}
+
+      {/* ── Ambient background particles (always present) ─ */}
+      {!loading && (
+        <>
+          <FloatingHearts />
+          <Sparkles />
+        </>
+      )}
+
+      {/* ── Main content ──────────────────────────────────── */}
+      <main
+        className={loading ? "opacity-0 pointer-events-none" : "opacity-100"}
+        style={{ transition: "opacity 0.5s ease" }}
+        id="main-content"
+      >
+        {/* 1. Hero */}
+        <HeroSection />
+
+        {/* 2. Love Timeline */}
+        <LoveTimeline />
+
+        {/* 3. Memory Gallery */}
+        <MemoryGallery />
+
+        {/* 4. Love Letter */}
+        <LoveLetter />
+
+        {/* 5. Reasons I Love You */}
+        <ReasonsILoveYou />
+
+        {/* 6. Birthday Countdown */}
+        <BirthdayCountdown />
+
+        {/* 7. Music Player */}
+        <MusicPlayer />
+
+        {/* 8. Surprise Gift */}
+        <SurpriseGift />
+
+        {/* 9. Final Message */}
+        <FinalMessage />
       </main>
-    </div>
+    </>
   );
 }
