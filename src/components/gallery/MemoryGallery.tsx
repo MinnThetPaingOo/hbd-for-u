@@ -176,7 +176,7 @@ function PolaroidCard({
 
           {/* Always-visible zoom hint */}
           <span
-            className="absolute bottom-2 right-2 w-8 h-8 rounded-full flex items-center justify-center group-hover:opacity-0 transition-opacity duration-300"
+            className="absolute bottom-2 right-2 w-8 h-8 rounded-full flex items-center justify-center"
             style={{
               background: "rgba(13,0,7,0.7)",
               backdropFilter: "blur(6px)",
