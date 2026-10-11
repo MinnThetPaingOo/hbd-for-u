@@ -34,9 +34,7 @@ function generateStars(): Star[] {
 
 // ─── Cinematic ending lines ───────────────────────────────────
 const endingLines = [
-  { text: "Here's to you,", delay: 0.2 },
-  { text: "to another year,", delay: 0.55 },
-  { text: "and all your wishes.", delay: 0.9 },
+  { text: "A little world for you 💕", delay: 0.2 },
 ];
 
 // ─── Main export ─────────────────────────────────────────────
@@ -179,7 +177,7 @@ export default function FinalMessage() {
           {endingLines.map((line, i) => (
             <motion.p
               key={i}
-              className="font-black leading-tight text-[clamp(1.75rem,8vw,5rem)]"
+              className="font-black leading-tight whitespace-nowrap text-[clamp(1.25rem,5.5vw,4rem)]"
               style={{
                 fontFamily: "var(--font-heading)",
                 background: "linear-gradient(135deg, #fff5f7 0%, #ff6b9d 50%, #ffd1dc 100%)",
@@ -216,26 +214,12 @@ export default function FinalMessage() {
 
         {/* Divider */}
         <motion.div
-          className="w-20 h-0.5 rounded-full mb-8"
+          className="w-20 h-0.5 rounded-full mb-12"
           style={{ background: "linear-gradient(90deg, #ff6b9d, #c0385a)" }}
           initial={{ scaleX: 0 }}
           animate={inView ? { scaleX: 1 } : {}}
           transition={{ delay: 1.4, duration: 0.6 }}
         />
-
-        {/* Message */}
-        <motion.p
-          className="text-base md:text-lg leading-[2.1] max-w-xl mb-12"
-          style={{ color: "rgba(255,245,247,0.65)", fontFamily: "var(--font-myanmar), var(--font-body)" }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.6, duration: 0.7 }}
-        >
-          {birthdayConfig.name}ရေ၊ ကိုယ်ဖန်တီးထားတဲ့ ဒီကမ္ဘာလေးက သဲ ဘယ်လောက်
-          အထူးခြားတယ်ဆိုတာကို အနည်းငယ်လောက်ပဲဖြစ်ဖြစ် ပြနိုင်လိမ့်မယ်လို့
-          မျှော်လင့်ပါတယ်။ ဒီနှစ်သစ်မှာ ရယ်မောရတာတွေ၊ စွန့်စားရတာတွေနဲ့
-          သဲဆန္ဒရှိသမျှ အားလုံး ပြည့်ဝပါစေ။ သဲ ဖြစ်နေပေးတာ ကျေးဇူးတင်ပါတယ်။ 🎉
-        </motion.p>
 
         {/* Celebrate button */}
         <motion.button
