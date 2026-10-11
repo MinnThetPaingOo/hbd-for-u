@@ -234,7 +234,7 @@ export default function HeroSection({ ready = true }: HeroSectionProps) {
         {/* Main title */}
         <motion.h1
           variants={item}
-          className="font-black leading-[1.1] mb-4 text-[clamp(2.2rem,9vw,5.5rem)]"
+          className="font-black leading-[1.1] text-[clamp(2.2rem,9vw,5.5rem)]"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           <span
@@ -254,7 +254,7 @@ export default function HeroSection({ ready = true }: HeroSectionProps) {
         {/* Type animation sub-title */}
         <motion.div
           variants={item}
-          className="text-[clamp(1.15rem,4.5vw,2.4rem)] font-semibold italic mb-5 sm:mb-6 min-h-[2.6em]"
+          className="text-[clamp(1.15rem,4.5vw,2.4rem)] font-semibold italic min-h-[2.6em] flex items-center justify-center"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           <span

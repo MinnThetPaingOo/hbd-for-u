@@ -172,7 +172,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
           {/* ── Title ── */}
           <motion.h1
-            className="text-3xl md:text-5xl font-black text-center px-6 mb-2"
+            className="text-3xl md:text-5xl font-black text-center px-6 mb-5 leading-[1.25]"
             style={{
               fontFamily: "var(--font-heading)",
               background: "linear-gradient(135deg, #fff5f7 20%, #ff6b9d 60%, #ffd1dc 100%)",
@@ -188,7 +188,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-2xl font-semibold italic mb-10 px-6"
+            className="text-lg md:text-2xl font-semibold italic mb-5 px-6"
             style={{
               fontFamily: "var(--font-heading)",
               background: "linear-gradient(135deg, #d4a017, #f5d788)",
