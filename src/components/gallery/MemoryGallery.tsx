@@ -481,13 +481,14 @@ export default function MemoryGallery() {
               backgroundClip: "text",
             }}
           >
-            Moments to Celebrate
+            Moments We&apos;ve Celebrated
           </h2>
           <p
             className="text-sm max-w-md mx-auto"
             style={{ color: "rgba(255,245,247,0.55)", fontFamily: "var(--font-body)" }}
           >
-            Every birthday we&apos;ve celebrated, and the one still to come.
+            We&apos;ve celebrated your birthday together every year, and we&apos;ll
+            be celebrating the coming one too.
             Tap any photo to enlarge it.
           </p>
           <div

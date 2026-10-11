@@ -102,8 +102,8 @@ export default function Home() {
         {/* 7. Music Player — temporarily hidden */}
         {/* <MusicPlayer /> */}
 
-        {/* 8. Surprise Gift */}
-        <SurpriseGift />
+        {/* 8. Surprise Gift — temporarily hidden */}
+        {/* <SurpriseGift /> */}
 
         {/* 9. Final Message */}
         <FinalMessage />

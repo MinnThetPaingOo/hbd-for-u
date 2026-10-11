@@ -225,16 +225,16 @@ export default function FinalMessage() {
 
         {/* Message */}
         <motion.p
-          className="text-base md:text-lg leading-[1.95] max-w-xl mb-12"
-          style={{ color: "rgba(255,245,247,0.65)", fontFamily: "var(--font-body)" }}
+          className="text-base md:text-lg leading-[2.1] max-w-xl mb-12"
+          style={{ color: "rgba(255,245,247,0.65)", fontFamily: "var(--font-myanmar), var(--font-body)" }}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.6, duration: 0.7 }}
         >
-          {birthdayConfig.name}, I hope this little world I built for you shows
-          even a fraction of how special you are. May this new year bring you
-          laughter, adventure and everything you wish for. Thank you for being
-          you. 🎉
+          {birthdayConfig.name}ရေ၊ ကိုယ်ဖန်တီးထားတဲ့ ဒီကမ္ဘာလေးက သဲ ဘယ်လောက်
+          အထူးခြားတယ်ဆိုတာကို အနည်းငယ်လောက်ပဲဖြစ်ဖြစ် ပြနိုင်လိမ့်မယ်လို့
+          မျှော်လင့်ပါတယ်။ ဒီနှစ်သစ်မှာ ရယ်မောရတာတွေ၊ စွန့်စားရတာတွေနဲ့
+          သဲဆန္ဒရှိသမျှ အားလုံး ပြည့်ဝပါစေ။ သဲ ဖြစ်နေပေးတာ ကျေးဇူးတင်ပါတယ်။ 🎉
         </motion.p>
 
         {/* Celebrate button */}
@@ -242,6 +242,7 @@ export default function FinalMessage() {
           id="final-celebrate-btn"
           onClick={() => {
             trigger();
+            window.dispatchEvent(new Event("celebrate-again"));
             document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
           }}
           className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-base md:text-lg text-white cursor-pointer border-0 outline-none focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"

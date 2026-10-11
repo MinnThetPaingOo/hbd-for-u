@@ -23,6 +23,13 @@ export default function BirthdayCake() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  // Relight the candles when "Celebrate Again!" is pressed
+  useEffect(() => {
+    const relightAll = () => setLit(Array(MAX_CANDLES).fill(true));
+    window.addEventListener("celebrate-again", relightAll);
+    return () => window.removeEventListener("celebrate-again", relightAll);
+  }, []);
+
   const allOut = lit.every((l) => !l);
 
   const blow = (index: number) => {
@@ -84,7 +91,7 @@ export default function BirthdayCake() {
             className="text-base md:text-lg mb-12 max-w-md mx-auto leading-[2.1]"
             style={{ color: "rgba(255,245,247,0.75)", fontFamily: "var(--font-body)" }}
           >
-            မျက်လုံးကိုမှိတ်ပြီး ဆုတောင်းလိုက်ပါ၊ ပြီးရင် ဖယောင်းတိုင်တွေကို နှိပ်ပြီး မှုတ်လိုက်ပါ။
+            မျက်လုံးမှိတ်ပြီး ဆုတောင်းလိုက်ပါ၊ ပြီးရင် ဖယောင်းတိုင်တွေကို နှိပ်ပြီး မှုတ်လိုက်ပါ။
           </p>
         </motion.div>
 
