@@ -52,6 +52,7 @@ const photos: Photo[] = [
     emoji: "🎉",
     gradient: "linear-gradient(135deg, #2d0054, #7b1fa2, #8b0000)",
     rotation: -1.2,
+    images: ["/photos/2026-1.jpg", "/photos/2026-2.jpg", "/photos/2026-3.jpg"],
   },
   // ── Temporarily hidden (uncomment to show more photos) ──
   // {
